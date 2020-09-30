@@ -1,0 +1,62 @@
+함수형 인터페이스
+
+함수형 인터페이스 Functional Interface
+- 추상메서드를 딱 하나만 갖고있는 인터페이스
+- single Abstract Method 인터페이스
+- @FunctionalInterface 애노테이션을 갖고있는 인터페이스
+
+람다 표현식 Chapter1.Lambda Expressions
+- 함수형 인터페이스의 인스턴스를 만드는 방법으로 사용이 가능하다
+- 코드를 줄일수 있다
+- 메소드 매개변수, 라틴타입, 변수로 만들어 사용할 수 있다
+
+자바에서 함수형 프로그래밍
+- 함수를 First class Object 일급객체로 사용할수 있다
+- 순수함수 pure function
+    - 사이드 이펙트가 없다 (함수 밖에 있는 값을 사용하지 않는다)
+    - 상태가 없다 (함수 밖에있는 값을 사용하지 않는다)
+- 고차 함수 Higher-Order Function
+    - 함수가 함수를 매개변수로 받을 수 있고 함수를 리턴할 수도 있다
+- 불편성
+
+====예제====
+
+인터페이스
+public interface IsInter{
+    abstract int isNum(int);
+}
+
+기존 코드
+
+IsInter isinter = new IsInter() {
+    @Override
+    public int isNum(int number) {
+        return number + 10;
+    };
+};
+
+IsInter isinter2 = new IsInter() {
+    @Override
+    public int isNum(int number) {
+        if (number % 2 == 0){
+            System.out.println("is odd");
+        }
+        return number;
+    };
+};
+
+System.out.println(isinter.isNum(5));
+System.out.println(isinter2.isNum(5));
+
+람다식 적용 코드
+
+IsInter isinter3 = (number) -> number + 10;
+
+IsInter isinter4 = (number) -> {
+    if (number % 2 == 0)
+        System.out.println("this is odd");
+    return number;
+};
+
+System.out.println(isinter3.isNum(5));
+System.out.println(isinter4.isNum(5));
